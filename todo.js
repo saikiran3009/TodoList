@@ -1,19 +1,20 @@
 let todoContainer = document.getElementById("todoContainer");
 let addEl = document.getElementById("add");
 let saveEl = document.getElementById("save");
+let userInputElement = document.getElementById("userInput");
 
 function localStorageTodos(){
   let stringifiedTodo = localStorage.getItem("userTask");
-  let parsedTodo = JSON.parse(stringifiedTodo)
+  let parsedTodo = JSON.parse(stringifiedTodo);
   if (parsedTodo === null){
     return []
   }
   else{
-    return parsedTodo
+    return parsedTodo;
   }
 }
 
-let todoList = localStorageTodos()
+let todoList = localStorageTodos();
 let todosCount = todoList.length;
 
 
@@ -22,7 +23,6 @@ saveEl.onclick = function(){
 }
 
 function onAddTodo() {
-  let userInputElement = document.getElementById("userInput");
   let userInputValue = userInputElement.value;
 
   if(userInputValue === ""){
@@ -144,4 +144,10 @@ function createAndAppendTodo(todo){
 for (let todo of todoList){
   createAndAppendTodo(todo);
 }
+
+userInputElement.addEventListener("keydown",function(event){
+  if (event.key === "Enter"){
+    onAddTodo();
+  }
+});
 
